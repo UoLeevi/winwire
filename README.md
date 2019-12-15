@@ -1,5 +1,22 @@
 # Usage example
 
+## Print text data from clipboard
+
+```Python
+import win32clipboard
+import winwire
+
+def print_clipboard_text():
+    if win32clipboard.IsClipboardFormatAvailable(13):
+        print(win32clipboard.GetClipboardData(13))
+    elif win32clipboard.IsClipboardFormatAvailable(1):
+        print(win32clipboard.GetClipboardData(1).decode('ascii'))
+
+winwire.listen_clipboard("test", print_clipboard_text)
+```
+
+## Print available data from clipboard
+
 ```Python
 import win32clipboard
 import winwire
@@ -64,17 +81,4 @@ def print_clipboard_contents():
         print(str(err))
 
 winwire.listen_clipboard("test", print_clipboard_contents)
-```
-
-```Python
-import win32clipboard
-import winwire
-
-def print_clipboard_text():
-    if win32clipboard.IsClipboardFormatAvailable(13):
-        print(win32clipboard.GetClipboardData(13))
-    elif win32clipboard.IsClipboardFormatAvailable(1):
-        print(win32clipboard.GetClipboardData(1).decode('ascii'))
-
-winwire.listen_clipboard("test", print_clipboard_text)
 ```
